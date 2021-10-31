@@ -1,10 +1,6 @@
 package com.taco.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
@@ -12,9 +8,6 @@ import java.util.*;
 
 @Entity
 @Table(name = "users")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class User{
 
     @Id
@@ -70,24 +63,28 @@ public class User{
 
     // One - Many me Ingredient Entitet
 
-    @OneToMany(mappedBy = "user")
-    private List<Ingredient> ingredient;
+   /* @OneToMany(mappedBy = "user")
+    private List<Ingredient> ingredient;*/
 
-    // Lidhja One - Many me Tako Entitet
+/*    // Lidhja One - Many me Tako Entitet
     @OneToMany(mappedBy = "user")
-    private List<Taco> tacos;
+    private List<Taco> tacos;*/
 
     //Lidhja One - One me Card Entitet
 
-
     // Lidhja Many - Many me Oders entity
 //kam perdorur Set sepse performon me mire se List ne lidhjet Many - Many
+
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "users_orders",
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+   /* @JoinTable(name = "users_orders",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id"))
+            inverseJoinColumns = @JoinColumn(name = "order_id"))*/
     private Set<Order> orders = new HashSet<>();
+
+    public User() {
+
+    }
 
 
     // me kte metod kemi mundesin qe permissions ti ruajme me shum se nje here per user, pra te kalojm nga nje permission, ne shum permissions per nje
@@ -99,7 +96,100 @@ public class User{
         return new ArrayList<>();
     }
 
-    public String toString() {
-        return "User(id=" + this.getId() + ", firstName=" + this.getFirstName() + ", lastName=" + this.getLastName() + ", age=" + this.getAge() + ", gender=" + this.getGender() + ", email=" + this.getEmail() + ", username=" + this.getUsername() + ", password=" + this.getPassword() + ", enabled=" + this.getEnabled();
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(String authorities) {
+        this.authorities = authorities;
+    }
+
+    public int getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }

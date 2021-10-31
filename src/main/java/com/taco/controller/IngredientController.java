@@ -2,6 +2,7 @@ package com.taco.controller;
 
 import com.taco.models.Ingredient;
 import com.taco.models.Type;
+import com.taco.models.dtos.IngredientDto;
 import com.taco.services.IngredientServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +21,13 @@ public class IngredientController {
 
     //get all available ingredients
     @GetMapping
-    public List<Ingredient> getAllIngredients(){
+    public List<IngredientDto> getAllIngredients(){
         return ingredientServices.getAllAvailableIngredients();
     }
 
     //get ingredients by name
     @GetMapping("/{text}")
-    public List<Ingredient> getAllIngredients(@PathVariable String text){
+    public List<IngredientDto> getAllIngredients(@PathVariable String text){
         return ingredientServices.readIngredientsByName(text);
     }
 

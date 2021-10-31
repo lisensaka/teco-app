@@ -1,7 +1,9 @@
 package com.taco.services;
 
 import com.taco.models.Role;
+import com.taco.models.dtos.RoleDto;
 import com.taco.models.dtos.UserDto;
+import com.taco.repository.OrderRepository;
 import com.taco.repository.RoleRepository;
 import com.taco.repository.UserRepository;
 import com.taco.models.User;
@@ -25,6 +27,7 @@ public class UserServices {
 
     private final UserRepository userRepository;
     private final RoleServices roleServices;
+    private final OrderRepository orderRepository;
 
     //me ane te ksaj klase do te bejm encriptimin e passwordit qe do na vij nga useri
     private final PasswordEncoder passwordEncoder;
@@ -51,8 +54,8 @@ public class UserServices {
     //adding a role to a user
     public void addRoleToUser(String firstName, String roleName){
         User user = userRepository.findByFirstName(firstName);
-        Role role = roleServices.getRoleByName(roleName);
-        user.setRole(role);
+        RoleDto role = roleServices.getRoleByName(roleName);
+        //user.setRole(role);
     }
 
     //get All users in db
@@ -66,13 +69,19 @@ public class UserServices {
     }
 
     //get All  users by some text
-    public List<UserDto> getUsersByName(String name) {
+    public List<UserDto> getUsersByUsername(String name) {
         List<User> users = userRepository.findAllByFirstName(name);
         List<UserDto> userDtoList = new ArrayList<>();
         for (User user: users) {
             userDtoList.add(UserDto.fromUserDto(user));
         }
         return userDtoList;
+    }
+
+    public UserDto getUserByUsername(String username){
+       // Long userId = UserDto.fromUserDto(userRepository.findByUsername(username)).getId();
+        //orderRepository.getById(Math.toIntExact(userId))
+        return  UserDto.fromUserDto( userRepository.findByUsername(username));
     }
 
     //get a user by email

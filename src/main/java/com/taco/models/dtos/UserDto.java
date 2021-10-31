@@ -43,6 +43,7 @@ public class UserDto {
         userDto.gender = user.getGender();
         userDto.email = user.getEmail();
         userDto.password = user.getPassword();
+
         userDto.roleDto = user.getRole().getRoleType().toString();
 //        userDto.cardDto = new CardDto(user.getCard().getId(),user.getCard().getUser(),user.getCard().getTaco());
         return userDto;

@@ -12,9 +12,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "orders")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Order {
 
     @Id
@@ -29,11 +26,12 @@ public class Order {
     //Lidhja Many - Many me User entity
     //kam perdorur Set sepse performon me mire se List ne lidhjet Many - Many
     @JsonIgnore
-    @ManyToMany
-    @JoinTable(name = "users_orders",
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+   /* @JoinTable(name = "users_orders",
             joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<User> user;
+            inverseJoinColumns = @JoinColumn(name = "user_id"))*/
+    private User user;
 
     //Lidhja Many - Many me Taco entity
     // mappedBy = po i tregojme se kush do jet owner-i i lidhjes
@@ -44,7 +42,43 @@ public class Order {
             inverseJoinColumns = @JoinColumn(name = "taco_id"))
     private Set<Taco> tacos;
 
-    public String toString() {
-        return "Order(id=" + this.getId() + ", localDate=" + this.getLocalDate() + ", status=" + this.getStatus() + ")";
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<Taco> getTacos() {
+        return tacos;
+    }
+
+    public void setTacos(Set<Taco> tacos) {
+        this.tacos = tacos;
     }
 }

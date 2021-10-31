@@ -1,6 +1,7 @@
 package com.taco.services;
 
 import com.taco.models.Role;
+import com.taco.models.dtos.RoleDto;
 import com.taco.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class RoleServices {
     }
 
     //getRoleByName
-    public Role getRoleByName(String roleName){
-        return roleRepository.findByRoleType(roleName);
+    public RoleDto getRoleByName(String roleName){
+        return  RoleDto.fromRoleDto(roleRepository.findByRoleType(roleName));
     }
 }

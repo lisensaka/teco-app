@@ -1,6 +1,7 @@
 package com.taco.controller;
 
 import com.taco.models.Taco;
+import com.taco.models.dtos.TacoDto;
 import com.taco.services.TacoServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class TacoController {
     //get all available tacos
     @GetMapping
     @ResponseStatus()
-    public ResponseEntity<List<Taco>> getAllTacos(){
+    public ResponseEntity<List<TacoDto>> getAllTacos(){
         return ResponseEntity.ok().body(tacoServices.getAllTacos());
     }
 

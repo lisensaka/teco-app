@@ -1,10 +1,13 @@
 package com.taco.services;
 
+import com.taco.models.dtos.OrderDto;
+import com.taco.models.dtos.TacoDto;
 import com.taco.repository.TacoRepository;
 import com.taco.models.Taco;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -12,7 +15,7 @@ import java.util.List;
 public class TacoServices {
 
     private final TacoRepository tacoRepository;
-
+    private final OrdersServices ordersServices;
 
     //create Taco
     public Taco createTaco(Taco taco){
@@ -20,10 +23,13 @@ public class TacoServices {
     }
 
     // get all available tacos
-    public List<Taco> getAllTacos(){
-        return tacoRepository.findAll();
+    public List<TacoDto> getAllTacos(){
+        List<TacoDto> tacoDtos = new ArrayList<>();
+        for (Taco t: tacoRepository.findAll()) {
+            tacoDtos.add(TacoDto.fromTacoDto(t));
+        }
+        return tacoDtos;
     }
-
 
     //update Taco from Db
     public Taco updateTaco(Taco taco){
@@ -34,4 +40,5 @@ public class TacoServices {
     public void deleteTacoById(Long id){
         tacoRepository.deleteById(id);
     }
+
 }

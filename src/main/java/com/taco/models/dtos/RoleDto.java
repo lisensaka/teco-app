@@ -1,5 +1,6 @@
 package com.taco.models.dtos;
 
+import com.taco.models.Role;
 import com.taco.models.User;
 import com.taco.models.enums.RoleType;
 import lombok.AllArgsConstructor;
@@ -15,5 +16,11 @@ public class RoleDto {
         private Long id;
         private RoleType roleType;
 //        private List<User> users;
+
+        public static RoleDto fromRoleDto(Role role){
+                RoleDto roleDto = new RoleDto();
+                roleDto.roleType = role.getRoleType();
+                return roleDto;
+        }
 
 }

@@ -38,12 +38,12 @@ public class DbInitializer implements CommandLineRunner {
        // this.roleRepository.saveAll(roles);
 
 
-        User user = new User("user2",passwordEncoder.encode("1234"),null,"READ","user2@atis.al","test2","User2");
-        User user2 = new User("user3",passwordEncoder.encode("1234"),null,"READ","user3@atis.al","test3","User3");
-        User user3 = new User("user4",passwordEncoder.encode("1234"),null,"READ","user4@atis.al","test4","User4");
+        User user = new User("user2",passwordEncoder.encode("1234"),clientRole,"READ","user2@atis.al","test2","User2");
+        User user2 = new User("user3",passwordEncoder.encode("1234"),clientRole,"READ","user3@atis.al","test3","User3");
+        User user3 = new User("user4",passwordEncoder.encode("1234"),clientRole,"READ","user4@atis.al","test4","User4");
 
         User admin = new User("admin123",passwordEncoder.encode("1234"),adminRole,"ADMIN","admin123@atis.al","123","Admin");
-        List<User> users = Arrays.asList(user,user3,user2);
-      //  this.userRepository.saveAll(users);
+        List<User> users = Arrays.asList(user,user3,user2,admin);
+        //this.userRepository.saveAll(users);
     }
 }

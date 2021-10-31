@@ -2,6 +2,8 @@ package com.taco.controller;
 
 import com.taco.models.Order;
 import com.taco.models.User;
+import com.taco.models.dtos.OrderDto;
+import com.taco.models.dtos.ResponseDto;
 import com.taco.security.UserDetailsImpl;
 import com.taco.security.jwtFilter.JwtAuthenticationFilter;
 import com.taco.security.jwtFilter.JwtAuthorizationFilter;
@@ -28,8 +30,8 @@ public class OrderController {
 
     //get all available orders
     @GetMapping("/by-username")
-    public List<Order> getAllOrders(Principal principal){
-        return ordersServices.getAllOrdersforSpecificUser(principal.getName());
+    public List<OrderDto> getAllOrders(Principal principal){
+        return ordersServices.getAllOrdersForSpecificUser(principal.getName());
     }
 
     //put new order
