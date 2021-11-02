@@ -47,9 +47,9 @@ public class CustomWebSecurity extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(),userRepository))
                 .authorizeRequests()
-        .antMatchers("/users").authenticated()
-        .antMatchers("/orders").authenticated();
-
+               // .antMatchers("/swagger-ui").permitAll()
+                .antMatchers("/api/users").authenticated()
+        .antMatchers("/api/orders").authenticated();
     }
 
     //authentication with db provider

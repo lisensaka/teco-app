@@ -17,19 +17,18 @@ public class TacoDto {
     private String tacoName ;
     private Set<IngredientDto> ingredientsDto = new HashSet<>();
 
-
-    public static TacoDto fromTacoDto(Taco taco){
+    /** Method for Converting from Taco Object to TacoDto */
+    public static TacoDto convertingFromTacoToTacoDtoObj(Taco taco){
         TacoDto tacoDto = new TacoDto();
 
         for (Ingredient i: taco.getIngredients()) {
             tacoDto.ingredientsDto.add(IngredientDto.fromIngredientDto(i));
-
         }
         for (IngredientDto i: tacoDto.ingredientsDto) {
             tacoDto.totalTacoPrice += i.getIngredientPrice();
-            tacoDto.tacoName = i.getType().name();
+            //tacoDto.tacoName = i.getType().name();
+            tacoDto.tacoName = taco.getTacoName();
         }
-
         return tacoDto;
     }
 

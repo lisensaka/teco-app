@@ -17,19 +17,19 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     private final UserServices userServices;
     private final OrdersServices ordersServices;
 
-    //get all users
+ /*   //get all users
     @GetMapping("/test")
     public List<OrderDto> getAllUsersByName(Principal principal){
         UserDto userDto = userServices.getUserByUsername(principal.getName());
         //return userServices.getAllUsers();
         return ordersServices.getOrderByUserId(Math.toIntExact(userDto.getId()));
-    }
+    }*/
 
     //get user by name
     @GetMapping("/name")

@@ -9,19 +9,16 @@ import java.util.List;
 
 @Entity
 @Table(name = "cards")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Card {
 
     @Id
-    private Long id;
+    protected Long id;
 
     //lidhje One - One me User
 
     @MapsId
     @OneToOne(fetch = FetchType.LAZY)
-    private User user;
+    protected User user;
 
 
     // lidhje One - Many me tacon
@@ -29,8 +26,29 @@ public class Card {
     @OneToMany(mappedBy = "card",
             cascade = {CascadeType.REFRESH,CascadeType.DETACH
     ,CascadeType.MERGE})
-    private List<Taco> taco;
+    protected List<Taco> taco;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Taco> getTaco() {
+        return taco;
+    }
+
+    public void setTaco(List<Taco> taco) {
+        this.taco = taco;
+    }
 }

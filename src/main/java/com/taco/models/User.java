@@ -12,33 +12,33 @@ public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
     @Column(name = "first_name",nullable = false,length = 50)
     @Size(min = 3,message = "The first name should contain at least 3 letters")
-    private String firstName;
+    protected String firstName;
 
     @Column(name = "last_name",nullable = false,length = 50)
     @Size(min = 3,message = "The last name should contain at least 3 letters")
-    private String lastName;
+    protected String lastName;
 
-    private int age;
+    protected int age;
 
-    private String gender;
+    protected String gender;
 
     @Email()
     @Column(nullable = false,unique = true, length = 100)
-    private String email;
+    protected String email;
 
     @Column(nullable = false)
-    private String username;
+    protected String username;
 
     @Column(nullable = false)
-    private String password;
+    protected String password;
 
-    private String authorities = "";
+    protected String authorities = "";
 
-    private int enabled ;
+    protected int enabled ;
 
     public User(String username, String password, Role role, String authorities,String email,String lastName, String firstName) {
         this.firstName = firstName;
@@ -59,7 +59,7 @@ public class User{
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
-    private Role role;
+    protected Role role;
 
     // One - Many me Ingredient Entitet
 
@@ -80,7 +80,7 @@ public class User{
    /* @JoinTable(name = "users_orders",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "order_id"))*/
-    private Set<Order> orders = new HashSet<>();
+    protected Set<Order> orders = new HashSet<>();
 
     public User() {
 

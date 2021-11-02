@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/tacos")
+@RequestMapping("/api/tacos")
 public class TacoController {
 
     private final TacoServices tacoServices;

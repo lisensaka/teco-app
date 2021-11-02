@@ -1,40 +1,11 @@
 package com.taco.models.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.taco.models.*;
-import com.taco.models.enums.RoleType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+public class UserDto extends User {
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class UserDto {
-
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private int age;
-    private String gender;
-    private String email;
-    private String password;
-
-    private String roleDto;
-    private CardDto cardDto;
-
-    private List<Ingredient> ingredient;
-    private List<Taco> tacos;
-    private Set<Order> orders = new HashSet<>();
-
-    public static UserDto fromUserDto(User user){
+    /** Method for Converting from User Object to UserDto */
+    public static UserDto convertingFromUserTpUserDtoObj(User user){
         UserDto userDto = new UserDto();
         userDto.id = user.getId();
         userDto.firstName = user.getFirstName();
@@ -43,9 +14,27 @@ public class UserDto {
         userDto.gender = user.getGender();
         userDto.email = user.getEmail();
         userDto.password = user.getPassword();
+        userDto.role = user.getRole();
+        userDto.orders = user.getOrders();
 
-        userDto.roleDto = user.getRole().getRoleType().toString();
-//        userDto.cardDto = new CardDto(user.getCard().getId(),user.getCard().getUser(),user.getCard().getTaco());
         return userDto;
+    }
+
+    /** Method for Converting the Object CardDto sent from the Api  to Card Object to save it into Db*/
+    public static User convertingFromUserDtoToUserObj(UserDto userDto){
+        User user = new User();
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setRole(userDto.getRole());
+        user.setAge(userDto.getAge());
+        user.setEmail(userDto.getEmail());
+        user.setAuthorities(userDto.getAuthorities());
+        user.setEnabled(userDto.getEnabled());
+        user.setGender(userDto.getGender());
+        user.setPassword(userDto.getPassword());
+        user.setId(userDto.getId());
+        user.setUsername(userDto.getUsername());
+        user.setOrders(userDto.getOrders());
+        return user;
     }
 }

@@ -1,6 +1,5 @@
 package com.taco.services;
 
-import com.taco.models.dtos.OrderDto;
 import com.taco.models.dtos.TacoDto;
 import com.taco.repository.TacoRepository;
 import com.taco.models.Taco;
@@ -26,7 +25,7 @@ public class TacoServices {
     public List<TacoDto> getAllTacos(){
         List<TacoDto> tacoDtos = new ArrayList<>();
         for (Taco t: tacoRepository.findAll()) {
-            tacoDtos.add(TacoDto.fromTacoDto(t));
+            tacoDtos.add(TacoDto.convertingFromTacoToTacoDtoObj(t));
         }
         return tacoDtos;
     }

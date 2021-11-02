@@ -16,10 +16,10 @@ public class Taco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double totalPrice;
+    protected double totalPrice;
 
     @Column(name = "taco_name")
-    private String tacoName;
+    protected String tacoName;
 
     // lidhje Many - Many me Ingredients
     //kam perdorur Set sepse performon me mire se List ne lidhjet Many - Many

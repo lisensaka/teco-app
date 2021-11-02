@@ -1,23 +1,16 @@
 package com.taco.services;
 
-import com.taco.models.Role;
 import com.taco.models.dtos.RoleDto;
 import com.taco.models.dtos.UserDto;
 import com.taco.repository.OrderRepository;
-import com.taco.repository.RoleRepository;
 import com.taco.repository.UserRepository;
 import com.taco.models.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -63,7 +56,7 @@ public class UserServices {
         List<User> users = userRepository.findAll();
         List<UserDto> userDtoList = new ArrayList<>();
         for (User user: users) {
-            userDtoList.add(UserDto.fromUserDto(user));
+            userDtoList.add(UserDto.convertingFromUserTpUserDtoObj(user));
         }
         return userDtoList;
     }
@@ -73,7 +66,7 @@ public class UserServices {
         List<User> users = userRepository.findAllByFirstName(name);
         List<UserDto> userDtoList = new ArrayList<>();
         for (User user: users) {
-            userDtoList.add(UserDto.fromUserDto(user));
+            userDtoList.add(UserDto.convertingFromUserTpUserDtoObj(user));
         }
         return userDtoList;
     }
@@ -81,7 +74,7 @@ public class UserServices {
     public UserDto getUserByUsername(String username){
        // Long userId = UserDto.fromUserDto(userRepository.findByUsername(username)).getId();
         //orderRepository.getById(Math.toIntExact(userId))
-        return  UserDto.fromUserDto( userRepository.findByUsername(username));
+        return  UserDto.convertingFromUserTpUserDtoObj( userRepository.findByUsername(username));
     }
 
     //get a user by email

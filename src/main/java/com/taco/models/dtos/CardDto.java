@@ -2,28 +2,35 @@ package com.taco.models.dtos;
 
 import com.taco.models.Card;
 import com.taco.models.Taco;
-import com.taco.models.User;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class CardDto {
+public class CardDto extends Card{
 
-        private Long id;
-        private User user;
-        private List<Taco> taco;
+        private UserDto userDto;
+        private List<TacoDto> tacoDto = new ArrayList<>();
 
-        public static CardDto fromCardDto(Card card){
+        /** Method for Converting from Card Object to CardDto */
+        public static CardDto convertingFromCardToCardDtoObj(Card card){
                 CardDto cardDto = new CardDto();
-                cardDto.id = card.getId();
-                cardDto.user = card.getUser();
-                cardDto.taco = card.getTaco();
+                cardDto.userDto = UserDto.convertingFromUserTpUserDtoObj(card.getUser());
+                for (Taco t:card.getTaco()) {
+                        cardDto.tacoDto.add(TacoDto.convertingFromTacoToTacoDtoObj(t));
+                }
                 return cardDto;
+        }
+
+        /** Method for Converting the Object CardDto sent from the Api  to Card Object to save it into Db*/
+        public static Card convertingFromCardDtoToCardObj(CardDto cardDto){
+                Card card = new Card();
+                List<Taco> tempVariableDtos = new ArrayList<>();
+                card.setUser(cardDto.getUser());
+                for (Taco t: cardDto.getTaco()) {
+                        tempVariableDtos.add(t);
+                }
+                card.setTaco(tempVariableDtos);
+                return card;
         }
 }
