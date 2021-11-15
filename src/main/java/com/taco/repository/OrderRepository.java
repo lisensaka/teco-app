@@ -1,21 +1,16 @@
 package com.taco.repository;
 
 import com.taco.models.Order;
-import com.taco.models.dtos.ResponseDto;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.NamedNativeQueries;
 import java.util.List;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
-    /*Orders createNewIngredient(Orders orders);
-    List<Orders> readAllOrders();
-    Orders updateOrder(Orders orders);*/
+
 
     //Query per te marr gjith porosit qe ka ber nje user
 //    @Query("select o " +

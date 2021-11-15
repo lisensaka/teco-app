@@ -5,6 +5,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.taco.models.User;
 import com.taco.repository.UserRepository;
 import com.taco.security.UserDetailsImpl;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -53,6 +55,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                     .verify(token.replace(JwtProperties.TOKEN_PREFIX, ""))
                     // dhe marrim usernamein nga tokeni
                     .getSubject();
+
 
             if (username != null) {
                 //kontrollojme ne db nese ky username egziston

@@ -1,6 +1,8 @@
 package com.taco.services;
 
+
 import com.taco.models.dtos.TacoDto;
+import com.taco.repository.IngredientRepository;
 import com.taco.repository.TacoRepository;
 import com.taco.models.Taco;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ public class TacoServices {
 
     private final TacoRepository tacoRepository;
     private final OrdersServices ordersServices;
+    private final IngredientRepository ingredientRepository;
 
     //create Taco
     public Taco createTaco(Taco taco){
@@ -40,4 +43,8 @@ public class TacoServices {
         tacoRepository.deleteById(id);
     }
 
+    public TacoDto getTacoByIngredient(String text) {
+        TacoDto tacoDtos = TacoDto.convertingFromTacoToTacoDtoObj(tacoRepository.findAllByTacoName_OrIngredientsContains(text, text));
+        return tacoDtos;
+    }
 }

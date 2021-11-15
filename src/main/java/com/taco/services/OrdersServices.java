@@ -24,7 +24,7 @@ public class OrdersServices {
         return orderRepository.save(orders);
     }
 
-    // Read All Orders from Db
+    // Read All Orders from Db for specific User
     public List<OrderDto> getAllOrdersForSpecificUser(String username) {
      /*   ResponseDto responseDto = new ResponseDto();
         User user = userRepository.findByUsername(username);
@@ -46,14 +46,14 @@ public class OrdersServices {
         return orderRepository.save(orders);
     }
 
-  /*  //returns all the orders this userId has in OrderDto fromat
+    //returns all the orders this userId has in OrderDto fromat
     public List<OrderDto> getOrderByUserId(int id) {
         List<OrderDto> orderDto = new ArrayList<>();
         for (Order o : orderRepository.getAllOrdersFromUserWithId(id)) {
             orderDto.add(OrderDto.fromOrderDto(o));
         }
         return orderDto;
-    }*/
+    }
 
 
 }

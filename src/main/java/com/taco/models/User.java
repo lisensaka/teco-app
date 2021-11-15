@@ -1,17 +1,21 @@
 package com.taco.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.taco.models.dtos.RoleDto;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.*;
 
 @Entity
 @Table(name = "users")
-public class User{
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false,updatable = false)
     protected Long id;
 
     @Column(name = "first_name",nullable = false,length = 50)
@@ -51,12 +55,14 @@ public class User{
         this.enabled = 1;
     }
 
-    //lidhja Many - One me Role Entitet
+    public User() {
+    }
+//lidhja Many - One me Role Entitet
 
     //nuk mendoj se na duhet lidhje e dy-anshme ne entitetet User-Role pasi nga roli
     //nuk do kerkojme info dhe kjo lidhje e nje-anshme performon
     //shum mire per CRUD
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     protected Role role;
@@ -75,14 +81,13 @@ public class User{
     // Lidhja Many - Many me Oders entity
 //kam perdorur Set sepse performon me mire se List ne lidhjet Many - Many
 
-    @JsonIgnore
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
    /* @JoinTable(name = "users_orders",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "order_id"))*/
     protected Set<Order> orders = new HashSet<>();
 
-    public User() {
+    public User(String username, String password, RoleDto roleDto, String authorities, String email, String lastName, String firstName) {
 
     }
 

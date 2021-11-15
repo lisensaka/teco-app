@@ -1,18 +1,12 @@
 package com.taco.controller;
 
 import com.taco.models.Order;
-import com.taco.models.User;
 import com.taco.models.dtos.OrderDto;
-import com.taco.models.dtos.ResponseDto;
+
 import com.taco.security.UserDetailsImpl;
-import com.taco.security.jwtFilter.JwtAuthenticationFilter;
-import com.taco.security.jwtFilter.JwtAuthorizationFilter;
 import com.taco.services.OrdersServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 

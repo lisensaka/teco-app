@@ -37,7 +37,9 @@ public class IngredientServices {
     //read ingredients by name
     public List<IngredientDto> readIngredientsByName(String text){
         List<IngredientDto> ingredientDtos = new ArrayList<>();
-        for (Ingredient i:ingredientRepository.findByIngredientsName(text)) {
+
+        // use streams
+        for (Ingredient i:ingredientRepository.findAllByType(text)) {
             ingredientDtos.add(IngredientDto.fromIngredientDto(i));
         }
         return ingredientDtos;

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public interface TacoRepository extends JpaRepository<Taco,Long>{
 
@@ -14,5 +15,7 @@ public interface TacoRepository extends JpaRepository<Taco,Long>{
             " join t.ingredients i " +
             " where o.id = :id")
     Taco findTacoByOrderId(@Param("id") int id);
+
+    Taco findAllByTacoName_OrIngredientsContains(String text, String text2);
 
 }

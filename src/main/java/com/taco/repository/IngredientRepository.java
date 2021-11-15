@@ -11,7 +11,5 @@ import java.util.List;
 @Repository
 public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
 
-    @Query("select i from Ingredient i where i.name = :text")
-    List<Ingredient> findByIngredientsName(@Param("text") String text);
-
+    List<Ingredient> findAllByType(String text);
 }

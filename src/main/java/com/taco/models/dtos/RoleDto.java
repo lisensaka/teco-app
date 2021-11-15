@@ -13,9 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoleDto {
-        private Long id;
         private RoleType roleType;
-//        private List<User> users;
 
         public static RoleDto fromRoleDto(Role role){
                 RoleDto roleDto = new RoleDto();

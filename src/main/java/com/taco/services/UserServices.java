@@ -26,22 +26,24 @@ public class UserServices {
     private final PasswordEncoder passwordEncoder;
 
     //create user
-    public User createNewUser(User user){
+    public UserDto createNewUser(UserDto user){
+        User user1 = UserDto.convertingFromUserDtoToUserObj(user);
         //ktu marrim passw e userit dhe e enkriptojme perpara se te futet ne DB
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        user1.setPassword(passwordEncoder.encode(user1.getPassword()));
+        userRepository.save(user1);
+        return user;
     }
-
      //get user by first-name
     public User getUserByName(String name){
         return userRepository.findByFirstName(name);
     }
 
     //update user
-    public User updateUser(User user){
+    public UserDto updateUser(UserDto userDto){
         //ktu marrim passw e userit dhe e enkriptojme perpara se te futet ne DB
+        User user = UserDto.convertingFromUserDtoToUserObj(userDto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        return UserDto.convertingFromUserTpUserDtoObj(userRepository.save(user));
     }
 
     //adding a role to a user
@@ -61,9 +63,9 @@ public class UserServices {
         return userDtoList;
     }
 
-    //get All  users by some text
-    public List<UserDto> getUsersByUsername(String name) {
-        List<User> users = userRepository.findAllByFirstName(name);
+    //get All  users
+    public List<UserDto> getAllAvailableUsers() {
+        List<User> users = userRepository.findAll();
         List<UserDto> userDtoList = new ArrayList<>();
         for (User user: users) {
             userDtoList.add(UserDto.convertingFromUserTpUserDtoObj(user));
@@ -72,13 +74,16 @@ public class UserServices {
     }
 
     public UserDto getUserByUsername(String username){
-       // Long userId = UserDto.fromUserDto(userRepository.findByUsername(username)).getId();
-        //orderRepository.getById(Math.toIntExact(userId))
         return  UserDto.convertingFromUserTpUserDtoObj( userRepository.findByUsername(username));
     }
 
     //get a user by email
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    //delete user by id
+    public void deleteUserById(Long id){
+        userRepository.deleteById(id);
     }
 }

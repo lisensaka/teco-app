@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/tacos")
+@RequestMapping("/tacos")
 public class TacoController {
 
     private final TacoServices tacoServices;
@@ -25,11 +25,11 @@ public class TacoController {
         return ResponseEntity.ok().body(tacoServices.getAllTacos());
     }
 
-    //get tacos by name
-  /*  @GetMapping("/text")
-    public ResponseEntity<List<Taco>> getTacoByName(@PathVariable String text){
-        return ResponseEntity.ok().body(tacoServices.getTacoByByIngredient(text));
-    }*/
+    //get tacos by ingredient name
+    @GetMapping("/{text}")
+    public ResponseEntity<TacoDto> getTacoByName(@PathVariable String text){
+        return ResponseEntity.ok().body(tacoServices.getTacoByIngredient(text));
+    }
 
     //put new tacos
     @PostMapping

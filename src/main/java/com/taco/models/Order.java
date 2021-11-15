@@ -7,15 +7,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
 @Table(name = "orders")
-public class Order {
+public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false,updatable = false)
     private int id;
 
     private LocalDate localDate;
@@ -25,7 +27,6 @@ public class Order {
 
     //Lidhja Many - Many me User entity
     //kam perdorur Set sepse performon me mire se List ne lidhjet Many - Many
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
    /* @JoinTable(name = "users_orders",
@@ -35,7 +36,7 @@ public class Order {
 
     //Lidhja Many - Many me Taco entity
     // mappedBy = po i tregojme se kush do jet owner-i i lidhjes
-    @JsonIgnore
+
     @ManyToMany
     @JoinTable(name = "tacos_orders",joinColumns =
     @JoinColumn(name = "order_id"),
